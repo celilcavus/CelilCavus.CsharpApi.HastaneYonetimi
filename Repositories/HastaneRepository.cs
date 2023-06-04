@@ -9,6 +9,8 @@ namespace CelilCavus.Repositories
     {
         private readonly IBaseDbContext _context;
 
+        private readonly string TblName = TableName.hastane.ToString();
+
         public HastaneRepository(IBaseDbContext context)
         {
             _context = context;
@@ -16,23 +18,23 @@ namespace CelilCavus.Repositories
 
         public void Add(Hastane item)
         {
-            _context.Context.Execute($@"INSERT INTO {TableName.Hastane} 
+            _context.Context.Execute($@"INSERT INTO {TblName} 
             (hastaneAdi,hastaneTel,hastaneAdress,hastaneMail) values
              ('{item.HastaneAdi}','{item.HastaneTel}','{item.HastaneAdress}','{item.HastaneMail}')");
         }
 
         public List<Hastane> GetAll() =>
-         _context.Context.Query<Hastane>($"SELECT * FROM {TableName.Hastane}").ToList();
+         _context.Context.Query<Hastane>($"SELECT * FROM {TblName}").ToList();
 
         public Hastane GetById(int id) =>
-         _context.Context.QueryFirst<Hastane>($"SELECT * FROM {TableName.Hastane} WHERE Id = {id}");
+         _context.Context.QueryFirst<Hastane>($"SELECT * FROM {TblName} WHERE Id = {id}");
 
-        public void Remove(int id) => _context.Context.Execute($"DELETE FROM {TableName.Hastane} WHERE Id = {id}");
+        public void Remove(int id) => _context.Context.Execute($"DELETE FROM {TblName} WHERE Id = {id}");
 
         public void Update(Hastane item)
         {
            _context.Context.Execute($@"
-            UPDATE {TableName.Hastane}  SET
+            UPDATE {TblName}  SET
             hastaneAdi = '{item.HastaneAdi}',
             hastaneTel = '{item.HastaneTel}',
             hastaneAdress = '{item.HastaneAdress}',

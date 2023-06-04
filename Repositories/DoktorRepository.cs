@@ -8,15 +8,17 @@ namespace CelilCavus.Repositories
     public class DoktorRepository : IRepository<Doktor>
     {
         private readonly IBaseDbContext _context;
+        private readonly string TblName = TableName.doktor.ToString();
 
         public DoktorRepository(IBaseDbContext context)
         {
             _context = context;
+            
         }
 
         public void Add(Doktor item)
         {
-           _context.Context.Execute($@"INSERT INTO {TableName.Doktor}
+           _context.Context.Execute($@"INSERT INTO {TblName}
             (DoktorAdi,UzmanlikAlani,Telefon,Eposta,CalistigiHastnae values
              ('{item.DoktorAdi}',
              '{item.UzmanlikAlani}',
@@ -28,22 +30,22 @@ namespace CelilCavus.Repositories
 
         public List<Doktor> GetAll()
         {
-           return _context.Context.Query<Doktor>($"SELECT * FROM {TableName.Doktor}").ToList();
+           return _context.Context.Query<Doktor>($"SELECT * FROM {TblName}").ToList();
         }
 
         public Doktor GetById(int id)
         {
-            return _context.Context.QueryFirstOrDefault<Doktor>($"SELECT * FROM {TableName.Doktor} WHERE Id = {id}");
+            return _context.Context.QueryFirstOrDefault<Doktor>($"SELECT * FROM {TblName} WHERE Id = {id}");
         }
 
         public void Remove(int id)
         {
-           _context.Context.Execute($"DELETE FROM {TableName.Doktor} WHERE Id = {id}");
+           _context.Context.Execute($"DELETE FROM {TblName} WHERE Id = {id}");
         }
 
         public void Update(Doktor item)
         {
-            _context.Context.Execute($@"UPDATE {TableName.Doktor} SET
+            _context.Context.Execute($@"UPDATE {TblName} SET
             DoktorAdi = '{item.DoktorAdi}',
             UzmanlikAlani = '{item.UzmanlikAlani}',
             Telefon = '{item.Telefon}',

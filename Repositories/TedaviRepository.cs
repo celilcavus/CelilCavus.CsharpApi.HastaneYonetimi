@@ -9,6 +9,8 @@ namespace CelilCavus.Repositories
     {
         private readonly IBaseDbContext _context;
 
+        private readonly string TblName = TableName.tedavi.ToString();
+        
         public TedaviRepository(IBaseDbContext context)
         {
             _context = context;
@@ -16,7 +18,7 @@ namespace CelilCavus.Repositories
 
         public void Add(Tedavi item)
         {
-            _context.Context.Execute($@"INSERT INTO {TableName.Tedavi} 
+            _context.Context.Execute($@"INSERT INTO {TblName} 
             (TedaviNo,HastaneAdi,DoktorAdi,HastaAdi,PolikinlikAdi,TedaviTarihi,Ucret) values
             (
                 '{item.TedaviNo}',
@@ -32,16 +34,16 @@ namespace CelilCavus.Repositories
 
         public List<Tedavi> GetAll()
         {
-            return _context.Context.Query<Tedavi>($"SELECT * FROM {TableName.Tedavi}").ToList();
+            return _context.Context.Query<Tedavi>($"SELECT * FROM {TblName}").ToList();
         }
 
-        public Tedavi GetById(int id) => _context.Context.QueryFirstOrDefault<Tedavi>($@"SELECT * FROM {TableName.Tedavi} WHERE Id = {id}");
+        public Tedavi GetById(int id) => _context.Context.QueryFirstOrDefault<Tedavi>($@"SELECT * FROM {TblName} WHERE Id = {id}");
 
-        public void Remove(int id) => _context.Context.Execute($"DELETE FROM {TableName.Doktor}");
+        public void Remove(int id) => _context.Context.Execute($"DELETE FROM {TblName}");
 
         public void Update(Tedavi item)
         {
-            _context.Context.Execute($@"UPDATE {TableName.Tedavi} SET 
+            _context.Context.Execute($@"UPDATE {TblName} SET 
             TedaviNo =  '{item.TedaviNo}',
             HastaneAdi = '{item.HastaneAdi}',
             DoktorAdi = '{item.DoktorAdi}',
