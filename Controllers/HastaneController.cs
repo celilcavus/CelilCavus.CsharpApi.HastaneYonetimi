@@ -62,7 +62,8 @@ namespace CelilCavus.Controllers
             catch (System.Exception ex)
             {
 
-                throw;
+                System.Console.WriteLine("Hastabe Exception ex " + ex.Message);
+                return BadRequest();
             }
         }
 
