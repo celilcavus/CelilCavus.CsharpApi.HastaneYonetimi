@@ -19,7 +19,7 @@ namespace CelilCavus.Repositories
         public void Add(Doktor item)
         {
            _context.Context.Execute($@"INSERT INTO {TblName}
-            (DoktorAdi,UzmanlikAlani,Telefon,Eposta,CalistigiHastnae values
+            (DoktorAdi,UzmanlikAlani,Telefon,Eposta,CalistigiHastnae) values
              ('{item.DoktorAdi}',
              '{item.UzmanlikAlani}',
              '{item.Telefon}',
